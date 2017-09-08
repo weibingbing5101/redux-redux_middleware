@@ -3,7 +3,8 @@
 #### 都是自己手写的，不能和官方库相比，但是常用的功能都是可以使用的。
 
 ##### 实现功能： 计数器  Todo  
-##### 相应技术： react  react-redux Provider connect  
+##### 相应技术： 
+                react  react-redux Provider connect  
                 redux combineReducers  
                 applyMiddleWare  logger  redux-thunk(这个可不用，可在action中写ajax,ajax成功后再执行dispatch)(都是自己手写的，有兴趣的朋友可以看一下，相信还是可以学到不少东西的)
 
