@@ -19,16 +19,16 @@ let state = {
     counterReducer: {number: 0}
 };
 
-
+// 多个中间件写法
 // 日志中间件
-// let logger = (oldStore)=>(dispatch)=>(action)=>{
-// 	console.log('before',oldStore.getState());
-// 	console.log(action);
-// 	dispatch(action);
-// 	console.log('after',oldStore.getState());
-// }
+let logger = (oldStore)=>(dispatch)=>(action)=>{
+	console.log('before',oldStore.getState());
+	console.log(action);
+	dispatch(action);
+	console.log('after',oldStore.getState());
+}
 
-// let store = applyMiddleWare(logger)(createStore)(combineReducers({ counterReducer }),state);
+let store = applyMiddleWare(logger)(createStore)(combineReducers({ counterReducer }),state);
 
 
 
@@ -42,9 +42,11 @@ let thunk = (oldStore)=>(dispatch)=>(action_OR_newDispatch)=>{
 	}
 }
 
+// 不使用中间件的写法
+// let store = createStore(combineReducers({ counterReducer }),state)
 
-
-let store = applyMiddleWare(thunk)(createStore)(combineReducers({ counterReducer }),state);
+// 使用中间件的写法
+// let store = applyMiddleWare(thunk)(createStore)(combineReducers({ counterReducer }),state);
 
 
 
