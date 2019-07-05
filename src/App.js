@@ -21,7 +21,7 @@ let state = {
 
 // 多个中间件写法
 // 日志中间件
-let logger = (oldStore)=>(dispatch)=>(action)=>{
+let logger = (oldStore)=>(dispatch)=>(action)=>{         // action回调函数 是dispatch
 	console.log('before',oldStore.getState());
 	console.log(action);
 	dispatch(action);
@@ -35,9 +35,11 @@ let store = applyMiddleWare(logger)(createStore)(combineReducers({ counterReduce
 
 // redux-thunk   用于处理dispatch中的异步函数，此中间件不建议使用，正常业务流程，可以在action中写ajax，当ajax请求回来后再执行dispatch
 let thunk = (oldStore)=>(dispatch)=>(action_OR_newDispatch)=>{
+	// 此处是dispatch
 	if(typeof action_OR_newDispatch === 'function'){
 		return action_OR_newDispatch(dispatch);
 	}else{
+		// 此处是actions
 		dispatch(action_OR_newDispatch);
 	}
 }
@@ -97,3 +99,26 @@ class App extends Component {
 };
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,6 +21,15 @@ class Add extends Component {
 	}
 };
 
+
+
+
+
+
+
+
+// connect 高阶
+
 export default connect((state)=>{
 	return {
 		number: state.counterReducer.number
