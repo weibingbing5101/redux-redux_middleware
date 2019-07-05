@@ -18,6 +18,6 @@
 
 
 
-### 运行
-* yarn
+### 运行.
+* yarn 
 * npm start 
