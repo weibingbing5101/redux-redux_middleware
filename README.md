@@ -1,12 +1,23 @@
-# redux-redux_middleware
+## react-redux-middleware-source-code-demo
 
-#### 都是自己手写的，不能和官方库相比，但是常用的功能都是可以使用的。
 
-##### 实现功能： 计数器  Todo  
-##### 相应技术： 
-                react  react-redux Provider connect  
-                redux combineReducers  
-                applyMiddleWare  logger  redux-thunk(这个可不用，可在action中写ajax,ajax成功后再执行dispatch)
-                (都是自己手写的，有兴趣的朋友可以看一下，相信还是可以学到不少东西的)
+### 文件目录
+* components/
+	* LazyLoadingImage -------------- 图片懒加载HOC组件
+* containers/
+	* counter.js --------------  redux容器包裹
+* page/	
+	* list/ -------------- HOC 图片懒加载案例
+	* counter/ -------------- 计数器redux案例
+	* home/ -------------- 列表语法
+	* nav/ -------------- 导航组件
+* store/index.js -------------- redux初始化
+	* actions -------------- 事件方法
+	* reducers -------------- state修nthy 
+* router.jsx -------------- 路由配置文件
 
-##### redux主要考查的还是高阶函数，科理化的一些东西，及函数链式调用，闭包，传参等，建议看一下设计模式，助于理解。
+
+
+### 运行
+* yarn
+* npm start 
