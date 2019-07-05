@@ -2,21 +2,17 @@
 
 
 ### 文件目录
-* components/
-	* LazyLoadingImage -------------- 图片懒加载HOC组件
-* containers/
-	* counter.js --------------  redux容器包裹
-* page/	
-	* list/ -------------- HOC 图片懒加载案例
-	* counter/ -------------- 计数器redux案例
-	* home/ -------------- 列表语法
-	* nav/ -------------- 导航组件
-* store/index.js -------------- redux初始化
-	* actions -------------- 事件方法
-	* reducers -------------- state修nthy 
-* router.jsx -------------- 路由配置文件
 
-
+* src/	
+	* App.js/ -------------- store初始化
+	* counter/ -------------- 计数器redux hoc 案例
+	
+	* reducers/counterReducer -------------- 计数器reducers
+	* actions/counterAction.js -------------- 计数器事件
+	
+	* redux/redux.js -------------- redux源码
+	* redux/combineReducers.js -------------- 合并多个reducers源码
+	* react-redux/index.js -------------- react连接redux源码
 
 ### 运行.
 * yarn 
