@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 
 // react-redux
-import {Provider} from './react-redux/index.js';
+import { Provider } from './react-redux/index.js';
 import Counter from './Counter.js';
 
 // redux
-import {createStore, applyMiddleWare} from './redux/redux.js';
+import { createStore, applyMiddleWare } from './redux/redux.js';
 import counterReducer from './reducers/counterReducer.js';
 import combineReducers from './redux/combineReducers.js';
 
@@ -16,32 +16,33 @@ import combineReducers from './redux/combineReducers.js';
 
 // store 没有单独放到一个文件夹中
 let state = {
-    counterReducer: {number: 0}
+    counterReducer: { number: 0 }
 };
 
 // 多个中间件写法
 // 日志中间件
-let logger = (oldStore)=>(dispatch)=>(action)=>{         // action回调函数 是dispatch
-	console.log('before',oldStore.getState());
-	console.log(action);
-	dispatch(action);
-	console.log('after',oldStore.getState());
+let logger = (oldStore) => (dispatch) => (action) => { // action回调函数 是dispatch
+    console.log('before', oldStore.getState());
+    console.log(action);
+    dispatch(action);
+    console.log('after', oldStore.getState());
 }
 
-let store = applyMiddleWare(logger)(createStore)(combineReducers({ counterReducer }),state);
+//                                                               {counterReducer: counterReducer}
+// let store = applyMiddleWare(logger)(createStore)(combineReducers({ counterReducer }), state);
 
 
 
 
 // redux-thunk   用于处理dispatch中的异步函数，此中间件不建议使用，正常业务流程，可以在action中写ajax，当ajax请求回来后再执行dispatch
-let thunk = (oldStore)=>(dispatch)=>(action_OR_newDispatch)=>{
-	// 此处是dispatch
-	if(typeof action_OR_newDispatch === 'function'){
-		return action_OR_newDispatch(dispatch);
-	}else{
-		// 此处是actions
-		dispatch(action_OR_newDispatch);
-	}
+let thunk = (oldStore) => (dispatch) => (action_OR_newDispatch) => {
+    // 此处是dispatch   这块用于异步的
+    if (typeof action_OR_newDispatch === 'function') {
+        return action_OR_newDispatch(dispatch);
+    } else {
+        // 此处是actions  同步的
+        dispatch(action_OR_newDispatch);
+    }
 }
 
 // 不使用中间件的写法
@@ -52,6 +53,7 @@ let thunk = (oldStore)=>(dispatch)=>(action_OR_newDispatch)=>{
 
 
 
+let store = applyMiddleWare(thunk, logger)(createStore)(combineReducers({ counterReducer }), state);
 
 
 
@@ -89,13 +91,14 @@ let thunk = (oldStore)=>(dispatch)=>(action_OR_newDispatch)=>{
 
 
 class App extends Component {
-	render() {
-		return (
-			<Provider store={store}>
-				<Counter />
-			</Provider>
-		);
-	}
+    render() {
+        return (
+            // 这块是一个facc
+            <Provider store={store}>
+                <Counter />
+            </Provider>
+        );
+    }
 };
 
 export default App;
@@ -114,11 +117,6 @@ export default App;
 
 
 
-
-
-
-
-
-
-
-
+// 
+// 
+//

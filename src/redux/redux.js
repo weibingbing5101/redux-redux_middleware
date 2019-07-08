@@ -5,6 +5,7 @@ function createStore(reducer, initState) {
 
     let dispatch = function(action) {
         state = reducer(state, action);
+        // 发布
         listenArr.forEach((item) => {
             item && item(state);
         })
@@ -14,7 +15,7 @@ function createStore(reducer, initState) {
         return state;
     }
 
-
+    // 订阅
     let sub = function(cbfn) {
         listenArr.push(cbfn);
     }
@@ -27,17 +28,60 @@ function createStore(reducer, initState) {
     }
 }
 
-let applyMiddleWare = (middleweare)=>(createStore)=>(reducer,state)=>{
+// middleweare  
+// let logger = (oldStore) => (dispatch) => (action) => { // action回调函数 是dispatch
+//     console.log('before', oldStore.getState());
+//     console.log(action);
+//     dispatch(action);
+//     console.log('after', oldStore.getState());
+// }
 
-	let store = createStore(reducer,state);
+// let thunk = (oldStore) => (dispatch) => (action_OR_newDispatch) => {
+//     // 此处是dispatch   这块用于异步的
+//     if (typeof action_OR_newDispatch === 'function') {
+//         return action_OR_newDispatch(dispatch);
+//     } else {
+//         // 此处是actions  同步的
+//         dispatch(action_OR_newDispatch);
+//     }
+// }
 
-	let dispatch = middleweare(store)(store.dispatch);
 
-	return {
-		...store,
-		dispatch
-	}
+
+
+let applyMiddleWare = (...middleweare) => (createStore) => (reducer, state) => {
+
+    let store = createStore(reducer, state);
+
+    let china = middleweare.map((item) => {
+        return item(store)
+    });
+
+    let dispatch = china.reduce((a, b) => {
+        return a(b(store.dispatch))
+    })
+
+    return {
+        ...store,
+        dispatch
+    }
 }
+
+
+
+
+
+// let applyMiddleWare = (middleweare) => (createStore) => (reducer, state) => {
+
+//     let store = createStore(reducer, state);
+
+//     let dispatch = middleweare(store)(store.dispatch);
+
+//     return {
+//         ...store,
+//         dispatch
+//     }
+// }
 
 
 

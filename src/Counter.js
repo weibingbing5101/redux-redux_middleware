@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import {COUNTERADD} from './actions/counterAction.js';
+import { COUNTERADD } from './actions/counterAction.js';
 
-import {connect} from './react-redux/index.js';
+import { connect } from './react-redux/index.js';
 
 class Add extends Component {
-	// methods
+    // methods
 
-	componentDidMount(){
-			
-			this.props.ajaxAdd()
-	}
+    componentDidMount() {
 
-	render(){
-		return(
-			<div>
+        this.props.ajaxAdd()
+    }
+
+    render() {
+        return (
+            <div>
 				<span>{this.props.number}</span> <br/>
 				<span onClick={()=>{this.props.counterAdd()}}> + </span>
+				<span onClick={()=>{this.props.ajaxAdd()}}>  ajaxAdd</span>
 			</div>
-		)
-	}
+        )
+    }
 };
 
 
@@ -30,23 +31,23 @@ class Add extends Component {
 
 // connect 高阶
 
-export default connect((state)=>{
-	return {
-		number: state.counterReducer.number
-	}
-},(dispatch)=>{
-	return {
-		counterAdd: ()=>{
-			dispatch({type:COUNTERADD})
-		},
-		ajaxAdd: ()=>{
-			dispatch((dispatch)=>{
-				setTimeout(()=>{
-					dispatch({type:COUNTERADD})
-				},3000)
-			})
-		}
-	}
+export default connect((state) => {
+    return {
+        number: state.counterReducer.number
+    }
+}, (dispatch) => {
+    return {
+        counterAdd: () => {
+            dispatch({ type: COUNTERADD })
+        },
+        ajaxAdd: () => {
+            dispatch((dispatch) => {
+                setTimeout(() => {
+                    dispatch({ type: COUNTERADD })
+                }, 3000)
+            })
+        }
+    }
 })(Add);
 
 
@@ -61,3 +62,18 @@ export default connect((state)=>{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
