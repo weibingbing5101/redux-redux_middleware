@@ -22,10 +22,10 @@ let state = {
 // 多个中间件写法
 // 日志中间件
 let logger = (oldStore) => (dispatch) => (action) => { // action回调函数 是dispatch
-    console.log('before', oldStore.getState());
-    console.log(action);
+    console.log('logger before', oldStore.getState());
+    console.log('logger dispatching', action);
     dispatch(action);
-    console.log('after', oldStore.getState());
+    console.log('logger after', oldStore.getState());
 }
 
 //                                                               {counterReducer: counterReducer}
@@ -38,10 +38,13 @@ let logger = (oldStore) => (dispatch) => (action) => { // action回调函数 是
 let thunk = (oldStore) => (dispatch) => (action_OR_newDispatch) => {
     // 此处是dispatch   这块用于异步的
     if (typeof action_OR_newDispatch === 'function') {
-        return action_OR_newDispatch(dispatch);
+        action_OR_newDispatch(dispatch);
     } else {
+        console.log('thunk 同步 begin');
         // 此处是actions  同步的
         dispatch(action_OR_newDispatch);
+        console.log('thunk 同步 begin');
+
     }
 }
 

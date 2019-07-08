@@ -8,16 +8,16 @@ class Add extends Component {
 
     componentDidMount() {
 
-        this.props.ajaxAdd()
+        // this.props.ajaxAdd()
     }
 
     render() {
         return (
             <div>
-				<span>{this.props.number}</span> <br/>
-				<span onClick={()=>{this.props.counterAdd()}}> + </span>
-				<span onClick={()=>{this.props.ajaxAdd()}}>  ajaxAdd</span>
-			</div>
+                <span>{this.props.number}</span> <br/>
+                <span onClick={()=>{this.props.counterAdd()}}> + </span>
+                <span onClick={()=>{this.props.ajaxAdd()}}>  ajaxAdd</span>
+            </div>
         )
     }
 };
@@ -42,8 +42,10 @@ export default connect((state) => {
         },
         ajaxAdd: () => {
             dispatch((dispatch) => {
+                console.log('thunk 异步 begin');
                 setTimeout(() => {
                     dispatch({ type: COUNTERADD })
+                    console.log('thunk 异步 3秒后 end  因为是定时器  所以这个只能写在定时器执行之后 不能写到中间件里面 logger是同步的写哪里无所谓');
                 }, 3000)
             })
         }

@@ -59,7 +59,25 @@ let applyMiddleWare = (...middleweare) => (createStore) => (reducer, state) => {
 
     let dispatch = china.reduce((a, b) => {
         return a(b(store.dispatch))
-    })
+    });
+
+    // dispatch = [
+    //     (dispatch) => (action) => { // action回调函数 是dispatch
+    //         console.log('before', oldStore.getState());
+    //         console.log(action);
+    //         dispatch(action);
+    //         console.log('after', oldStore.getState());
+    //     },
+    //     (dispatch) => (action_OR_newDispatch) => {
+    //         // 此处是dispatch   这块用于异步的
+    //         if (typeof action_OR_newDispatch === 'function') {
+    //             return action_OR_newDispatch(dispatch);
+    //         } else {
+    //             // 此处是actions  同步的
+    //             dispatch(action_OR_newDispatch);
+    //         }
+    //     }
+    // ];
 
     return {
         ...store,
