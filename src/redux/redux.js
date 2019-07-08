@@ -39,7 +39,7 @@ function createStore(reducer, initState) {
 // let thunk = (oldStore) => (dispatch) => (action_OR_newDispatch) => {
 //     // 此处是dispatch   这块用于异步的
 //     if (typeof action_OR_newDispatch === 'function') {
-//         return action_OR_newDispatch(dispatch);
+//         action_OR_newDispatch(dispatch);
 //     } else {
 //         // 此处是actions  同步的
 //         dispatch(action_OR_newDispatch);
@@ -61,14 +61,13 @@ let applyMiddleWare = (...middleweare) => (createStore) => (reducer, state) => {
         return a(b(store.dispatch))
     });
 
-    // dispatch = [
-    //     (dispatch) => (action) => { // action回调函数 是dispatch
-    //         console.log('before', oldStore.getState());
-    //         console.log(action);
-    //         dispatch(action);
-    //         console.log('after', oldStore.getState());
-    //     },
-    //     (dispatch) => (action_OR_newDispatch) => {
+    // dispatch = (action) => { // action回调函数 是dispatch
+    //     console.log('before', oldStore.getState());
+    //     console.log(action);
+
+
+    //     dispatch(action); // 替换为以下
+    //     ((action_OR_newDispatch) => {
     //         // 此处是dispatch   这块用于异步的
     //         if (typeof action_OR_newDispatch === 'function') {
     //             return action_OR_newDispatch(dispatch);
@@ -76,8 +75,10 @@ let applyMiddleWare = (...middleweare) => (createStore) => (reducer, state) => {
     //             // 此处是actions  同步的
     //             dispatch(action_OR_newDispatch);
     //         }
-    //     }
-    // ];
+    //     })(action);
+
+    //     console.log('after', oldStore.getState());
+    // };
 
     return {
         ...store,
