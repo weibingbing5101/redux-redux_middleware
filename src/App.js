@@ -43,7 +43,7 @@ let thunk = (oldStore) => (dispatch) => (action_OR_newDispatch) => {
         console.log('thunk 同步 begin');
         // 此处是actions  同步的
         dispatch(action_OR_newDispatch);
-        console.log('thunk 同步 begin');
+        console.log('thunk 同步 end');
 
     }
 }

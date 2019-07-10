@@ -67,6 +67,7 @@ let applyMiddleWare = (...middleweare) => (createStore) => (reducer, state) => {
 
 
     //     dispatch(action); // 替换为以下
+    
     //     ((action_OR_newDispatch) => {
     //         // 此处是dispatch   这块用于异步的
     //         if (typeof action_OR_newDispatch === 'function') {

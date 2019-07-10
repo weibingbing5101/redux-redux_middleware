@@ -41,13 +41,13 @@ export default connect((state) => {
             dispatch({ type: COUNTERADD })
         },
         ajaxAdd: () => {
-            dispatch((dispatch) => {
+            // dispatch((dispatch) => {
                 console.log('thunk 异步 begin');
                 setTimeout(() => {
                     dispatch({ type: COUNTERADD })
                     console.log('thunk 异步 3秒后 end  因为是定时器  所以这个只能写在定时器执行之后 不能写到中间件里面 logger是同步的写哪里无所谓');
                 }, 3000)
-            })
+            // })
         }
     }
 })(Add);
