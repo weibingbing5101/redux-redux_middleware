@@ -1,4 +1,4 @@
-## react-redux-middleware-source-code-demo
+## react-redux-middleware-source-code-demo  手写redux+中间件  react-redux简易版源码
 
 
 ### 文件目录
