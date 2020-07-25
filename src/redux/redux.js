@@ -48,7 +48,6 @@ function createStore(reducer, initState) {
 
 
 
-
 let applyMiddleWare = (...middleweare) => (createStore) => (reducer, state) => {
 
     let store = createStore(reducer, state);
@@ -71,7 +70,7 @@ let applyMiddleWare = (...middleweare) => (createStore) => (reducer, state) => {
     //     ((action_OR_newDispatch) => {
     //         // 此处是dispatch   这块用于异步的
     //         if (typeof action_OR_newDispatch === 'function') {
-    //             return action_OR_newDispatch(dispatch);
+    //             action_OR_newDispatch(dispatch);
     //         } else {
     //             // 此处是actions  同步的
     //             dispatch(action_OR_newDispatch);
@@ -80,6 +79,8 @@ let applyMiddleWare = (...middleweare) => (createStore) => (reducer, state) => {
 
     //     console.log('after', oldStore.getState());
     // };
+
+    console.log(dispatch);
 
     return {
         ...store,
